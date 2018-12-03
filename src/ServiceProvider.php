@@ -35,9 +35,9 @@ class ServiceProvider extends IlluminateServiceProvider {
         $this->define("DOMPDF_LOG_OUTPUT_FILE", $this->app['path.storage'] . '/logs/dompdf.html');
 
         $config_file = $this->app['config']->get(
-            'laravel-dompdf::config_file'
-        ) ?: $this->app['path.base'] . '/vendor/dompdf/dompdf/dompdf_config.inc.php';
-
+            'laravel-dompdf::config'
+        );
+        /*
         if (file_exists($config_file)) {
             require_once $config_file;
         } else {
@@ -45,10 +45,11 @@ class ServiceProvider extends IlluminateServiceProvider {
                 "$config_file cannot be loaded, please configure correct config file (config.php: config_file)"
             );
         }
+        */
         
         $this->app->bind('dompdf', function ($app) {
-                return new PDF($app['config'], $app['files'], $app['view'], $app['path.public']);
-            });
+            return new PDF($app['config'], $app['files'], $app['view'], $app['path.public']);
+        });
     }
 
     /**

@@ -5,6 +5,7 @@ use Exception;
 use Illuminate\Config\Repository as ConfigRepository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Response;
+use Dompdf\Dompdf AS DOMPDF;
 
 /**
  * A Laravel wrapper for DOMPDF
@@ -56,7 +57,7 @@ class PDF{
 
         $this->orientation = $this->config->get('laravel-dompdf::orientation') ?: 'portrait';
 
-        $this->dompdf = new \DOMPDF();
+        $this->dompdf = new DOMPDF();
         $this->dompdf->set_base_path(realpath($publicPath));
     }
 
